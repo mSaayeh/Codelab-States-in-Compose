@@ -1,8 +1,10 @@
 package com.msayeh.codelab_stateincompose.components
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.msayeh.codelab_stateincompose.data.WellnessTask
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WellnessTasksList(
     onClose: (WellnessTask) -> Unit,
@@ -45,7 +48,9 @@ fun WellnessTasksList(
                     taskName = task.label,
                     onClose = { onClose(task) },
                     task.checked.value,
-                    { onCheckedChange(task, it) })
+                    { onCheckedChange(task, it) },
+                    modifier = Modifier.animateItemPlacement(tween(durationMillis = 250))
+                )
             }
         }
 

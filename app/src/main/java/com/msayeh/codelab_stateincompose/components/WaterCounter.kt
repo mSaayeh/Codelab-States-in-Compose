@@ -1,5 +1,9 @@
 package com.msayeh.codelab_stateincompose.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,8 +29,11 @@ fun StatefulCounter(modifier: Modifier = Modifier) {
 
 @Composable
 fun StatelessCounter(count: Int, onAddPressed: () -> Unit, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        if (count > 0) {
+    Column(
+        modifier = modifier
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
 //            var showTask by rememberSaveable {
 //                mutableStateOf(true)
 //            }
@@ -37,6 +44,10 @@ fun StatelessCounter(count: Int, onAddPressed: () -> Unit, modifier: Modifier = 
 //                    modifier = Modifier.padding(bottom = 8.dp)
 //                )
 //            }
+        AnimatedVisibility(
+            visible = count > 0,
+            enter = fadeIn(tween(250)) + slideInVertically(tween(250))
+        ) {
             Text(
                 text = "You've had $count glasses of water."
             )

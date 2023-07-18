@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Codelab - State in Compose</string>
+    <string name="cancel">Cancel</string>
+</resources>
